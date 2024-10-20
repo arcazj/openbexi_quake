@@ -54,7 +54,6 @@ public class VolcanoJsonConverter {
         } else {
             printUsageAndExit();
         }
-
         return parsedArgs;
     }
 
