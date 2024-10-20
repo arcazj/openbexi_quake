@@ -168,7 +168,6 @@ class EarthquakeJsonConverter {
         }
     }
 
-
     private static Map<String, JSONArray> processJson(String jsonInput) {
         JSONObject inputJson = new JSONObject(jsonInput);
         JSONArray features = inputJson.getJSONArray("features");
