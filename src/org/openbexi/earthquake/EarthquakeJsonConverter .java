@@ -91,7 +91,7 @@ class EarthquakeJsonConverter {
             String endtime = formatDate(calendar.getTime());
 
             // Iterate day by day within the current month, moving backward
-            while (true) {
+            do {
                 // Initialize starttime as the current day in the loop
                 String starttime = formatDate(calendar.getTime());
 
@@ -105,7 +105,7 @@ class EarthquakeJsonConverter {
                 String outputFilePath = String.format("%searthquake_%s_%s_%s" + "_00" + ".json", outputDirPath, year, month, day);
 
                 // Check if all expected files exist before skipping processing
-                if (new File(outputDirPath).listFiles() != null && new File(outputDirPath).listFiles().length == 24) {
+                if (new File(outputDirPath).listFiles() != null && Objects.requireNonNull(new File(outputDirPath).listFiles()).length == 24) {
                     System.out.println("All files already exist, skipping: " + outputDirPath);
                 } else {
                     try {
@@ -146,10 +146,7 @@ class EarthquakeJsonConverter {
                     endtime = starttime;
                 }
 
-                if (calendar.get(Calendar.DAY_OF_MONTH) == calendar.getActualMinimum(Calendar.DAY_OF_MONTH)) {
-                    break;
-                }
-            }
+            } while (calendar.get(Calendar.DAY_OF_MONTH) != calendar.getActualMinimum(Calendar.DAY_OF_MONTH));
 
             // Move the calendar back by one month for the next iteration
             calendar.add(Calendar.MONTH, -1);

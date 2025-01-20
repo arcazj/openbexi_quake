@@ -88,9 +88,7 @@ public class VolcanoJsonConverter {
 
             String outputDirPath = String.format("/data/volcano/%s/%s/%s/", year, month, day);
             File outputDir = new File(outputDirPath);
-            if (!outputDir.exists()) {
-                outputDir.mkdirs();
-            }
+            if (!outputDir.exists()) outputDir.mkdirs();
 
             String outputFilePath = String.format("%svolcano_%s_%s_%s" + "_00" + ".json", outputDirPath, year, month, day);
             JSONObject event = createEvent(notice, formattedDate);
@@ -119,7 +117,7 @@ public class VolcanoJsonConverter {
         addIfNotNull(data, "notice_data", notice.opt("notice_data"));
 
         JSONArray sections = notice.optJSONArray("sections");
-        if (sections != null && sections.length() > 0) {
+        if (sections != null && !sections.isEmpty()) {
             JSONObject section = sections.getJSONObject(0);
             addIfNotNull(data, "synopsis", section.opt("synopsis"));
             addIfNotNull(data, "colorCode", section.opt("colorCode"));
